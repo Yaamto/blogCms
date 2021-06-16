@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="alert alert-secondary text-center">
+        <h1>Tout les tarifs</h1>    
+    </div>
+        
+    <table class="table table-bordered">
+        <thead class="bg-dark text-center">
+        <tr class="text-white">          
+            <th>Titre</th>
+            <th>Prix</th>
+            <th>Détails</th>
+            <th>modification</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        {{#each prices}}
+            <tr>               
+                <td>{{title}}</td>
+                <td>{{price}}</td>
+                <td>{{details}}</td>
+               
+                <td class="d-flex">
+                    <a href="/admin/price/edit/{{_id}}" class="btn btn-sm btn-warning mr-2">Modifier tarif</a>
+
+                    <form action="/admin/price/delete/{{_id}}?newMethod=DELETE" method="post">
+                        <button class="btn btn-sm btn-danger" type="submit">Supprimer tarif</button>
+                    </form>
+                    
+                    
+                </td>
+            </tr>    
+        {{/each}}
+        
+        </tbody>
+    </table>
+    
+    <h1>Nouveau Tarif</h1>
+    
+    <div class="row p-4">
+        <div class="col-md-10">
+             <button class="btn btn-sm btn-primary" style="margin-left: 10px;" id="addButton">Ajouter détail</button>
+             <button class="btn btn-sm btn-primary" style="margin-left: 10px;" id="removeButton">Supprimer détail</button>
+            <form action="/admin/price" method="post" enctype="multipart/form-data">
+                <div id="textInput">
+                <div class="form-group">
+                    <label for="title">Titre</label>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Entrez le titre">
+                </div>
+                <div class="form-group">
+                    <label for="price">Prix</label>
+                    <input type="text" class="form-control" name="price" id="price" placeholder="Entrez le prix">
+                </div>
+                 <div class="form-group">
+                    <label for="details">Détails</label>
+                    
+                    <input type="text" class="form-control" name="details" id="details" placeholder="Entrez détail">
+                    
+                </div>
+                </div>
+                
+                <button class="btn btn-outline-success btn-lg" style="margin-top: 10px;" type="submit">Créer tarif</button>
+                
+                
+            </form>
+            
+        </div>
+    
+    
+</div>
+
+ <script>
+        var addDetail = document.getElementById('addButton')
+        var textInput = document.getElementById('textInput')
+        var removeInput = document.getElementById('removeButton')
+             addDetail.onclick = function(){
+            var newField = document.createElement('input')
+            newField.setAttribute('type', 'text')
+            newField.setAttribute('name', 'details')
+            newField.setAttribute('class', 'form-control')
+            newField.setAttribute('placeholder', 'Entrez détail')
+            newField.setAttribute('margin-top', '10px')
+            newField.style.marginTop ="13px"
+
+            textInput.appendChild(newField)
+        }
+
+
+        removeInput.onclick = function(){
+            var input_tags = textInput.getElementsByTagName('input')
+            if(input_tags.length>2){
+                textInput.removeChild(input_tags[(input_tags.length)-1])
+            }
+        }
+
+          </script>    

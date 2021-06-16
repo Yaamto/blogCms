@@ -1,0 +1,107 @@
+ <div class="container">
+    <div class="alert alert-secondary text-center">
+        <h1>Tout les tarifs</h1>    
+    </div>
+        
+    <table class="table table-bordered">
+        <thead class="bg-dark text-center">
+        <tr class="text-white">          
+            <th>Titre</th>
+            <th>Prix</th>
+            <th>Détails</th>
+            <th>modification</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        {{#each prices}}
+        
+            <tr>               
+                <td>{{title}}</td>
+                <td>{{price}}</td>
+                <td>{{details}}</td>
+               
+                <td class="d-flex">
+                    <a href="/admin/price/edit/{{_id}}" class="btn btn-sm btn-warning mr-2">Modifier tarif</a>
+
+                    <form action="/admin/price/delete/{{_id}}?newMethod=DELETE" method="post">
+                        <button class="btn btn-sm btn-danger" type="submit">Supprimer tarif</button>
+                    </form>
+                    
+                    
+                </td>
+            </tr>    
+        {{/each}}
+        
+        </tbody>
+    </table>
+ 
+ 
+ <div class="alert alert-secondary text-center">
+        <h1>Modification</h1>    
+    </div>
+ <div class="row p-4">
+        <div class="col-md-10">
+             <button class="btn btn-sm btn-primary" style="margin-left: 10px;" id="addButton">Ajouter détail</button>
+             <button class="btn btn-sm btn-primary" style="margin-left: 10px;" id="removeButton">Supprimer détail</button>
+            <form action="/admin/price/edit/{{price._id}}?newMethod=PUT" method="post" enctype="multipart/form-data" name="formA">
+                <div id="textInput">
+                <div class="form-group">
+                    <label for="title">Titre</label>
+                    <input type="text" class="form-control" name="title" id="price-title" value="{{price.title}}">
+                    <input type="hidden" class="form-control" id="price-id" name="id" value="{{price._id}}">
+                </div>
+                <div class="form-group">
+                    <label for="price">Prix</label>
+                    <input type="text" class="form-control" name="price" id="price-price" value="{{price.price}}">
+                </div>
+             
+                 <div class="form-group">
+                       
+                    <label for="details">Détails</label>
+                    {{#each price.details as |item|}}
+                    <div>
+                    <input type="text" class="form-control" name="details" id="price-details" style="margin-top: 13px;" value="{{item}}">
+                    
+                     <button class="btn btn-sm btn-danger" style="margin-left: 10px;" formaction="/admin/price/delete/details/{{price._id}}?newMethod=DELETE">-</button>
+                    </div>
+                    {{/each}}
+                   
+                </div>
+                 </div>
+                <button class="btn btn-outline-warning btn-lg" id="update-price-button">Mettre à jour</button>
+               
+                </form>
+                   
+                </div>
+                </div>
+
+
+                 <script>
+        var addDetail = document.getElementById('addButton')
+        var textInput = document.getElementById('textInput')
+        var removeInput = document.getElementById('removeButton')
+             addDetail.onclick = function(){
+            var newField = document.createElement('input')
+            newField.setAttribute('type', 'text')
+            newField.setAttribute('name', 'details')
+            newField.setAttribute('class', 'form-control')
+            newField.setAttribute('placeholder', 'Entrez détail')
+            newField.setAttribute('margin-top', '10px')
+            newField.style.marginTop ="13px"
+
+            textInput.appendChild(newField)
+        }
+
+
+        removeInput.onclick = function(){
+            var input_tags = textInput.getElementsByTagName('input')
+            if(input_tags.length>2){
+                textInput.removeChild(input_tags[(input_tags.length)-1])
+            }
+        }
+
+         
+      
+      
+
+          </script>    
