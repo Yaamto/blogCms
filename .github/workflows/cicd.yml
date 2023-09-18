@@ -18,3 +18,19 @@ jobs:
           node-version: '15'
       - run: docker image build -t nodejs_image ./
       - run: docker run nodejs_image npm run test
+      - name: deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /usr/blogCms
+            docker compose down
+            cd ..
+            rm -r blogCms
+            docker image rm nodejs_image
+            git clone https://github.com/Yaamto:${{secrets.TOKEN_GIT}}/blogCms.git
+            docker image build -t nodejs_image ./
+            docker run -d -p 3000:3000 nodejs_image
