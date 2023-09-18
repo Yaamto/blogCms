@@ -4,12 +4,12 @@ FROM node:15
 WORKDIR /app
 
 # Install app dependencies
-COPY package*.json /app/
+COPY package*.json .
 
 RUN npm install
 
 # Bundle app source
-COPY . /app/
+COPY . .
 
 EXPOSE 3000
 
