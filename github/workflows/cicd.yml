@@ -1,0 +1,15 @@
+name: CI nodejs
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  nodejs_test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker image build -t nodejs_image ./
+      - run: docker run nodejs_image
