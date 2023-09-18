@@ -28,10 +28,5 @@ jobs:
           port: ${{ secrets.PORT }}
           command_timeout: 30m
           script: |
-            cd /usr
-            rm -r blogCms
-            docker image rm nodejs_image
-            git clone https://Yaamto:${{secrets.TOKEN_GIT}}@github.com/Yaamto/blogCms.git
-            cd blogCms
-            docker image build -t nodejs_image ./
-            docker run -d -p 3000:3000 nodejs_image
+            whoami
+            ls -al
