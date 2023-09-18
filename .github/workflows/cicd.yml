@@ -20,7 +20,7 @@ jobs:
       - run: docker image build -t nodejs_image ./
       - run: docker run nodejs_image npm run test
       - name: deploy to server
-        uses: ppleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
