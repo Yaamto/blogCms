@@ -30,6 +30,7 @@ jobs:
           script: |
             cd /usr
             rm -r blogCms
+            docker rm $(docker ps -aq)
             docker image rm nodejs_image
             git clone https://Yaamto:${{secrets.TOKEN_GIT}}@github.com/Yaamto/blogCms.git
             cd blogCms
