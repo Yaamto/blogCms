@@ -26,9 +26,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /usr/blogCms
-            docker compose down
-            cd ..
+            cd /usr
             rm -r blogCms
             docker image rm nodejs_image
             git clone https://Yaamto:${{secrets.TOKEN_GIT}}@github.com/Yaamto/blogCms.git
