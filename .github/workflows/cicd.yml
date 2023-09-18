@@ -7,7 +7,7 @@ on:
     branches:
       - main
 jobs:
-  nodejs_test:
+  setup_nodejs_and_test:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -16,5 +16,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '15'
-      - run: docker image build -t nodejs_image ./
-      - run: docker run nodejs_image npm run test
+      - run: docker compose up -d
+      - run: npm run test
+
