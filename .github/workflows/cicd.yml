@@ -18,3 +18,4 @@ jobs:
           node-version: '15'
       - run: docker image build -t nodejs_image ./
       - run: docker run nodejs_image
+      - run: npm run test
