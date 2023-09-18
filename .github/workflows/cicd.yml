@@ -9,6 +9,7 @@ on:
 jobs:
   setup_nodejs_and_test:
     runs-on: ubuntu-22.04
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v3
       - name: Update npm
@@ -25,6 +26,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
+          command_timeout: 30m
           script: |
             cd /usr
             rm -r blogCms
