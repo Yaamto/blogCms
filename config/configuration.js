@@ -7,6 +7,7 @@ module.exports = {
         res.locals.user = req.user || null;
         next();
     },
-
+    
 
 };
+console.log("test")
