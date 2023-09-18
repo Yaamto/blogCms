@@ -73,9 +73,6 @@ app.use('/admin', adminRoutes);
 
 
 /* Start The Server */
-setTimeout(() => {
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
-}, 500)
-
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
