@@ -6,8 +6,7 @@ on:
   pull_request:
     branches:
       - main
-    types:
-      - closed
+
 jobs:
   setup_nodejs_and_test:
     runs-on: ubuntu-22.04
@@ -22,6 +21,7 @@ jobs:
       - run: docker image build -t nodejs_image ./
       - run: docker run nodejs_image npm run test
       - name: deploy to server
+        if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
